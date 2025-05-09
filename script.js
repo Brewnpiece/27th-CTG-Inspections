@@ -209,9 +209,10 @@ form.addEventListener('submit', e => {
 
   // Submit the form using fetch
   fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-    .then(response => console.log('Success!', response))
+    .then(response => response.json())
+    .then(data => console.log('Success!', data))
     .catch(error => console.error('Error!', error.message));
-})
+});
 
 // Function to filter inspection buttons based on the selected inspection type
 function filterItemsByInspectionType() {
