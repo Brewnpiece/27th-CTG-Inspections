@@ -246,3 +246,19 @@ html, body {
     height: 100vh; /* Full viewport height */
     overflow-y: auto; /* Enable vertical scrolling only for the #pages container */
   }
+
+  @media (max-width: 600px) {
+    .container2 {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      z-index: 1000;
+      padding: 10px 0;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    }
+    body, html {
+      padding-bottom: 70px; /* Prevent content from being hidden behind buttons */
+    }
+  }
