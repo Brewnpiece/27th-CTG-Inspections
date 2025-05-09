@@ -1,8 +1,6 @@
 //PAGE SWIPER
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
-let previousPageId = null; // Tracks the previous page
-let inspectionResults = {};
 
 function swipePage(direction) {
   // Hide the current page
@@ -32,7 +30,7 @@ let currentMainDiv = "Uniform"; // Tracks the current main div
 let currentInspectionItem = ""; // Tracks the current inspection item
 
 // Save and Restore Scroll Position
-let savedScrollPosition = 0; // Tracks the scroll position
+let savedScrollPosition = 0; // Variable to store the scroll position
 
 function saveScrollPosition() {
   const scrollableContainer = document.querySelector("#pages");
@@ -55,54 +53,56 @@ function restoreScrollPosition() {
 }
 
 // Navigate to the shared Pass/Fail page
-function goToPassFailPage(itemName) {
-  // Store the current inspection item
-  currentInspectionItem = itemName;
+function goToPassFailPage(item, skipReasons = false) {
+  currentInspectionItem = item;
 
-  // Save the current page and scroll position
-  const pages = ['ID', 'Uniform', 'Bunk', 'Locker', 'Data'];
-  for (let page of pages) {
-    const pageElement = document.getElementById(page);
-    if (pageElement.style.display === 'block') {
-      previousPageId = page;
-      savedScrollPosition = pageElement.scrollTop || window.scrollY;
-      break;
+  // Save the current scroll position
+  saveScrollPosition();
+
+  // Update the currentMainDiv to the parent div of the clicked button
+  const activeButton = document.querySelector(`button[onclick="goToPassFailPage('${item}', ${skipReasons})"]`);
+  if (activeButton) {
+    const parentDiv = activeButton.closest("div[id]");
+    if (parentDiv) {
+      currentMainDiv = parentDiv.id; // Update the currentMainDiv to the parent div's ID
     }
   }
 
-  // Hide all pages
-  pages.forEach(page => {
-    document.getElementById(page).style.display = 'none';
+  // Hide all main divs
+  const mainDivs = document.querySelectorAll("#pages > div");
+  mainDivs.forEach((div) => {
+    div.style.display = "none";
   });
 
-  // Show the PassFailPage
-  document.getElementById('PassFailPage').style.display = 'block';
-  document.getElementById('inspection-title').innerText = itemName;
+  // Show the Pass/Fail page
+  document.getElementById("PassFailPage").style.display = "block";
+  document.getElementById("inspection-title").innerText = `Inspecting: ${item}`;
+
+  // If skipReasons is true, update the "Fail" button to directly mark fail
+  const failButton = document.getElementById("fail-button");
+  if (skipReasons) {
+    failButton.onclick = () => markFailDirect();
+  } else {
+    failButton.onclick = () => goToFailReasonsPage();
+  }
 }
 
 // Mark as Pass
 function markPass() {
-  if (currentInspectionItem) {
-    // Update the pass-fail container with "Pass"
-    const containerId = `pass-fail-${currentInspectionItem}`;
-    const container = document.getElementById(containerId);
-    if (container) {
-      container.innerHTML = '<span style="color: green;">PASS</span>';
-    }
+  // Hide the Pass/Fail page
+  document.getElementById("PassFailPage").style.display = "none";
 
-    // Record the result as "Pass"
-    inspectionResults[currentInspectionItem] = "Pass";
-  }
+  // Show the main div
+  document.getElementById(currentMainDiv).style.display = "block";
 
-  // Hide the PassFailPage
-  document.getElementById('PassFailPage').style.display = 'none';
+  // Restore the scroll position
+  restoreScrollPosition();
 
-  // Show the previous page and restore scroll position
-  if (previousPageId) {
-    const previousPage = document.getElementById(previousPageId);
-    previousPage.style.display = 'block';
-    previousPage.scrollTop = savedScrollPosition;
-    window.scrollTo(0, savedScrollPosition);
+  // Add green "PASS" text to the pass-fail container
+  const passFailContainer = document.getElementById(`pass-fail-${currentInspectionItem}`);
+  if (passFailContainer) {
+    passFailContainer.innerText = "PASS";
+    passFailContainer.style.color = "green";
   }
 }
 
@@ -152,27 +152,20 @@ function goToFailReasonsPage() {
 
 // Mark as Fail with a Reason
 function markFail(reason) {
-  // Hide the FailReasonsPage
-  document.getElementById('FailReasonsPage').style.display = 'none';
+  // Hide the Fail Reasons page
+  document.getElementById("FailReasonsPage").style.display = "none";
 
-  // Update the pass-fail container with "Fail" and the reason
-  if (currentInspectionItem) {
-    const containerId = `pass-fail-${currentInspectionItem}`;
-    const container = document.getElementById(containerId);
-    if (container) {
-      container.innerHTML = `<span style="color: red;">FAIL</span>: ${reason}`;
-    }
+  // Show the main div
+  document.getElementById(currentMainDiv).style.display = "block";
 
-    // Record the result as "Fail" with the reason
-    inspectionResults[currentInspectionItem] = `Fail: ${reason}`;
-  }
+  // Restore the scroll position
+  restoreScrollPosition();
 
-  // Show the previous page and restore scroll position
-  if (previousPageId) {
-    const previousPage = document.getElementById(previousPageId);
-    previousPage.style.display = 'block';
-    previousPage.scrollTop = savedScrollPosition;
-    window.scrollTo(0, savedScrollPosition);
+  // Add red "FAIL: (reason)" text to the pass-fail container
+  const passFailContainer = document.getElementById(`pass-fail-${currentInspectionItem}`);
+  if (passFailContainer) {
+    passFailContainer.innerText = `FAIL: (${reason})`;
+    passFailContainer.style.color = "red";
   }
 }
 
@@ -187,8 +180,8 @@ const failReasons = {
   "Belt" : ["Not Present", "Not Centered"],
   "Trousers": ["Iron", "Strings", "Pockets"],
   "Boots": ["Shine", "Laces"],
-  "Attention" : ["Eyes", "Hands", "Grounded/Heels"],
-  "Sheet" : ["Bulges", "Wrinkles", "Tuck"]
+  "Attention" : ["Eyes", "Hands", "Grounded/Heels"]
+  
 };
 
 //FORM
@@ -242,29 +235,3 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
-
-// Fail button logic
-document.getElementById('fail-button').onclick = function () {
-  // Hide the PassFailPage
-  document.getElementById('PassFailPage').style.display = 'none';
-
-  // Show the FailReasonsPage
-  const failReasonsPage = document.getElementById('FailReasonsPage');
-  failReasonsPage.style.display = 'block';
-
-  // Clear existing fail reasons
-  failReasonsPage.innerHTML = "<h1>Fail Reasons</h1>";
-
-  // Get the fail reasons for the current inspection item
-  const reasons = failReasons[currentInspectionItem] || ["No reasons available"];
-
-  // Dynamically create buttons for each fail reason
-  reasons.forEach(reason => {
-    const button = document.createElement('button');
-    button.className = 'reason-button';
-    button.innerText = reason;
-    button.onclick = () => markFail(reason); // Pass the reason to the markFail function
-    failReasonsPage.appendChild(button);
-  });
-};
-
