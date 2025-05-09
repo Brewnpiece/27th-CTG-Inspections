@@ -220,74 +220,71 @@ form.addEventListener('submit', e => {
     .catch(error => console.error('Error!', error.message));
 });
 
+// Function to filter inspection buttons based on the selected inspection type
+function filterItemsByInspectionType() {
+  const inspectionType = document.getElementById("inspection-type").value; // Get the selected value
+  const allButtons = document.querySelectorAll(".inspection-button"); // Get all inspection buttons
+  const allPassFailContainers = document.querySelectorAll(".pass-fail-container"); // Get all pass/fail containers
+
   // Define which buttons and pass/fail boxes should be visible for each inspection type
-  const visibilityMap = {pectionType() {
+  const visibilityMap = {
     ABU: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (Blues)", "Trousers (Blues)", "Shoes (Blues)", "Locker"],
     Blues: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Accoutrements", "Blouse", "Belt", "Gig Line", "Trousers", "Shoes", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (ABU)", "Trousers (ABU)", "Boots (ABU)", "Locker"],
     PT: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf/Cover", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
   };
-  // Define which buttons and pass/fail boxes should be visible for each inspection type
+
   // Hide all buttons and pass/fail containers initially
-  allButtons.forEach((button) => {Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (Blues)", "Trousers (Blues)", "Shoes (Blues)", "Locker"],
-    button.style.display = "none";e/Cosmetics", "Insignia", "Accoutrements", "Blouse", "Belt", "Gig Line", "Trousers", "Shoes", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (ABU)", "Trousers (ABU)", "Boots (ABU)", "Locker"],
-  });T: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf/Cover", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
+  allButtons.forEach((button) => {
+    button.style.display = "none";
+  });
   allPassFailContainers.forEach((container) => {
     container.style.display = "none";
-  });Hide all buttons and pass/fail containers initially
-  allButtons.forEach((button) => {
+  });
+
   // Show buttons and their corresponding pass/fail containers based on the selected inspection type
   const visibleItems = visibilityMap[inspectionType] || [];
-  visibleItems.forEach((item) => {ontainer) => {
+  visibleItems.forEach((item) => {
     const button = document.querySelector(`button[onclick*="goToPassFailPage('${item}'"]`);
     const container = document.getElementById(`pass-fail-${item}`);
     if (button) {
-      button.style.display = "block";ding pass/fail containers based on the selected inspection type
-    }st visibleItems = visibilityMap[inspectionType] || [];
-    if (container) {ch((item) => {
-      container.style.display = "block";r(`button[onclick*="goToPassFailPage('${item}'"]`);
-    }onst container = document.getElementById(`pass-fail-${item}`);
-  });f (button) {
-}     button.style.display = "block";
+      button.style.display = "block";
     }
+    if (container) {
+      container.style.display = "block";
+    }
+  });
+}
+
 // Call filterItemsByInspectionType on page load to set ABU as the default
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
 
-function prepareFormData() {ionType on page load to set ABU as the default
+function prepareFormData() {
   const form = document.forms['submit-to-google-sheet'];
-  document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
-  // Remove any existing hidden inputs for pass-fail datadiately
+
+  // Remove any existing hidden inputs for pass-fail data
   const existingInputs = form.querySelectorAll('.pass-fail-input');
   existingInputs.forEach(input => input.remove());
-function prepareFormData() {
-  // Find all pass-fail-container elements (including hidden ones)
+
+  // Find all pass-fail-container elements
   const passFailContainers = document.querySelectorAll('.pass-fail-container');
-  // Remove any existing hidden inputs for pass-fail data
-  passFailContainers.forEach(container => {All('.pass-fail-input');
-    console.log(`Processing container: ${container.id}, Content: "${container.textContent.trim()}"`);
+
+  passFailContainers.forEach(container => {
     const id = container.id; // e.g., "pass-fail-Cover"
     const value = container.textContent.trim(); // Get the text content
-  const passFailContainers = document.querySelectorAll('.pass-fail-container');
+
     if (value) {
-      // Create a hidden inputontainer => {
-      const input = document.createElement('input');d}, Content: "${container.textContent.trim()}"`);
-      input.type = 'hidden'; // e.g., "pass-fail-Cover"
-      input.name = id; // Use the container ID as the input namecontent
+      // Create a hidden input
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = id; // Use the container ID as the input name
       input.value = value;
       input.classList.add('pass-fail-input'); // Add a class for easy removal later
-      // Create a hidden input
-      // Append the hidden input to the forminput');
-      form.appendChild(input);
-    } input.name = id; // Use the container ID as the input name
-  }); input.value = value;
-      input.classList.add('pass-fail-input'); // Add a class for easy removal later
-  console.log('Form data prepared:', new FormData(form)); // Debug log
-}     // Append the hidden input to the form
+
+      // Append the hidden input to the form
       form.appendChild(input);
     }
   });
-
-  console.log('Form data prepared:', new FormData(form)); // Debug log
 }
