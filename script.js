@@ -1,6 +1,12 @@
 //PAGE SWIPER
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
+//PASS/FAIL FUNCTIONALITY
+let currentMainDiv = "Uniform"; // Tracks the current main div
+let currentInspectionItem = ""; // Tracks the current inspection item
+
+// Save and Restore Scroll Position
+let savedScrollPosition = 0; // Variable to store the scroll position
 
 function swipePage(direction) {
   // Hide the current page
@@ -29,12 +35,7 @@ function swipePage(direction) {
   }
 }
 
-//PASS/FAIL FUNCTIONALITY
-let currentMainDiv = "Uniform"; // Tracks the current main div
-let currentInspectionItem = ""; // Tracks the current inspection item
 
-// Save and Restore Scroll Position
-let savedScrollPosition = 0; // Variable to store the scroll position
 
 function saveScrollPosition() {
   const scrollableContainer = document.querySelector("#pages");
