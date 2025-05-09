@@ -248,3 +248,31 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
+
+function prepareFormData() {
+  const form = document.forms['submit-to-google-sheet'];
+
+  // Remove any existing hidden inputs for pass-fail data
+  const existingInputs = form.querySelectorAll('.pass-fail-input');
+  existingInputs.forEach(input => input.remove());
+
+  // Find all pass-fail-container elements
+  const passFailContainers = document.querySelectorAll('.pass-fail-container');
+
+  passFailContainers.forEach(container => {
+    const id = container.id; // e.g., "pass-fail-Cover"
+    const value = container.textContent.trim(); // Get the text content
+
+    if (value) {
+      // Create a hidden input
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = id; // Use the container ID as the input name
+      input.value = value;
+      input.classList.add('pass-fail-input'); // Add a class for easy removal later
+
+      // Append the hidden input to the form
+      form.appendChild(input);
+    }
+  });
+}
