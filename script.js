@@ -39,6 +39,7 @@ function saveScrollPosition() {
   } else {
     savedScrollPosition = window.scrollY;
   }
+  console.log(`Saved scroll position: ${savedScrollPosition}`); // Debug log
 }
 
 function restoreScrollPosition() {
@@ -49,6 +50,7 @@ function restoreScrollPosition() {
     } else {
       window.scrollTo(0, savedScrollPosition);
     }
+    console.log(`Restored scroll position: ${savedScrollPosition}`); // Debug log
   }, 0);
 }
 
