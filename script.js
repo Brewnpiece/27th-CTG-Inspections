@@ -2,7 +2,6 @@
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
 let previousPageId = null;
-let currentInspectionItem = null;
 
 function swipePage(direction) {
   // Hide the current page
@@ -29,6 +28,7 @@ function swipePage(direction) {
 
 //PASS/FAIL FUNCTIONALITY
 let currentMainDiv = "Uniform"; // Tracks the current main div
+let currentInspectionItem = ""; // Tracks the current inspection item
 
 // Save and Restore Scroll Position
 let savedScrollPosition = 0; // Variable to store the scroll position
@@ -55,30 +55,36 @@ function restoreScrollPosition() {
 
 // Navigate to the shared Pass/Fail page
 function goToPassFailPage(itemName) {
+  // Store the currently visible page
+  const pages = ['ID', 'Uniform', 'Bunk', 'Locker', 'Data'];
+  for (let page of pages) {
+    if (document.getElementById(page).style.display === 'block') {
+      previousPageId = page;
+      break;
+    }
+  }
+
   // Hide all pages
-  document.getElementById('Uniform').style.display = 'none';
-  document.getElementById('Bunk').style.display = 'none';
-  document.getElementById('Locker').style.display = 'none';
-  document.getElementById('Data').style.display = 'none';
+  pages.forEach(page => {
+    document.getElementById(page).style.display = 'none';
+  });
 
-  // Find and store the currently visible page
-  if (document.getElementById('Uniform').style.display === 'block') previousPageId = 'Uniform';
-  if (document.getElementById('Bunk').style.display === 'block') previousPageId = 'Bunk';
-  if (document.getElementById('Locker').style.display === 'block') previousPageId = 'Locker';
-  if (document.getElementById('Data').style.display === 'block') previousPageId = 'Data';
-
-  // Show PassFailPage
+  // Show the PassFailPage
   document.getElementById('PassFailPage').style.display = 'block';
   document.getElementById('inspection-title').innerText = itemName;
-  currentInspectionItem = itemName;
 }
 
 // Mark as Pass
 function markPass() {
-  // ...your logic to record the result...
+  // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
+
+  // Show the previous page
   if (previousPageId) {
     document.getElementById(previousPageId).style.display = 'block';
+  } else {
+    // Fallback: Show the first page (e.g., ID page)
+    document.getElementById('ID').style.display = 'block';
   }
 }
 
@@ -212,11 +218,16 @@ document.addEventListener("DOMContentLoaded", () => {
   filterItemsByInspectionType(); // Apply the filter immediately
 });
 
-// Do the same for your fail handler
-document.getElementById('fail-button').onclick = function() {
-  // ...your logic to record the result...
+// Fail button logic
+document.getElementById('fail-button').onclick = function () {
+  // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
+
+  // Show the previous page
   if (previousPageId) {
     document.getElementById(previousPageId).style.display = 'block';
+  } else {
+    // Fallback: Show the first page (e.g., ID page)
+    document.getElementById('ID').style.display = 'block';
   }
 };
