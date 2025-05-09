@@ -202,10 +202,15 @@ const scriptURL = 'https://script.google.com/macros/s/AKfycbxMLLnXk-VmoBrNur-TNq
 const form = document.forms['submit-to-google-sheet']
 
 form.addEventListener('submit', e => {
-  e.preventDefault()
-  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+  e.preventDefault();
+
+  // Prepare the form data
+  prepareFormData();
+
+  // Submit the form using fetch
+  fetch(scriptURL, { method: 'POST', body: new FormData(form) })
     .then(response => console.log('Success!', response))
-    .catch(error => console.error('Error!', error.message))
+    .catch(error => console.error('Error!', error.message));
 })
 
 // Function to filter inspection buttons based on the selected inspection type
@@ -256,10 +261,11 @@ function prepareFormData() {
   const existingInputs = form.querySelectorAll('.pass-fail-input');
   existingInputs.forEach(input => input.remove());
 
-  // Find all pass-fail-container elements
+  // Find all pass-fail-container elements (including hidden ones)
   const passFailContainers = document.querySelectorAll('.pass-fail-container');
 
   passFailContainers.forEach(container => {
+    console.log(`Processing container: ${container.id}, Content: "${container.textContent.trim()}"`);
     const id = container.id; // e.g., "pass-fail-Cover"
     const value = container.textContent.trim(); // Get the text content
 
@@ -275,4 +281,6 @@ function prepareFormData() {
       form.appendChild(input);
     }
   });
+
+  console.log('Form data prepared:', new FormData(form)); // Debug log
 }
