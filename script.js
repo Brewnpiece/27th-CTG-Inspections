@@ -56,16 +56,11 @@ function restoreScrollPosition() {
 
 // Navigate to the shared Pass/Fail page
 function goToPassFailPage(itemName) {
-  // Store the currently visible page
-  const pages = ['ID', 'Uniform', 'Bunk', 'Locker', 'Data'];
-  for (let page of pages) {
-    if (document.getElementById(page).style.display === 'block') {
-      previousPageId = page;
-      break;
-    }
-  }
+  // Store the current inspection item
+  currentInspectionItem = itemName;
 
   // Hide all pages
+  const pages = ['ID', 'Uniform', 'Bunk', 'Locker', 'Data'];
   pages.forEach(page => {
     document.getElementById(page).style.display = 'none';
   });
@@ -78,6 +73,13 @@ function goToPassFailPage(itemName) {
 // Mark as Pass
 function markPass() {
   if (currentInspectionItem) {
+    // Update the pass-fail container with "Pass"
+    const containerId = `pass-fail-${currentInspectionItem}`;
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = '<span style="color: green;">Pass</span>';
+    }
+
     // Record the result as "Pass"
     inspectionResults[currentInspectionItem] = "Pass";
   }
@@ -226,14 +228,16 @@ document.addEventListener("DOMContentLoaded", () => {
 // Fail button logic
 document.getElementById('fail-button').onclick = function () {
   if (currentInspectionItem) {
-    // Record the result as "Fail"
-    inspectionResults[currentInspectionItem] = "Fail";
-
-    // Optionally, prompt for a reason
-    const reason = prompt(`Why did "${currentInspectionItem}" fail?`);
-    if (reason) {
-      inspectionResults[currentInspectionItem] += `: ${reason}`;
+    // Update the pass-fail container with "Fail"
+    const containerId = `pass-fail-${currentInspectionItem}`;
+    const container = document.getElementById(containerId);
+    if (container) {
+      const reason = prompt(`Why did "${currentInspectionItem}" fail?`);
+      container.innerHTML = `<span style="color: red;">Fail</span>${reason ? `: ${reason}` : ''}`;
     }
+
+    // Record the result as "Fail"
+    inspectionResults[currentInspectionItem] = reason ? `Fail: ${reason}` : "Fail";
   }
 
   // Hide the PassFailPage
@@ -246,4 +250,3 @@ document.getElementById('fail-button').onclick = function () {
     document.getElementById('ID').style.display = 'block';
   }
 };
-
