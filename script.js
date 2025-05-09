@@ -58,10 +58,7 @@ function restoreScrollPosition() {
 function goToPassFailPage(item, skipReasons = false) {
   currentInspectionItem = item;
 
-  // Save the current scroll position
-  saveScrollPosition();
-
-  // Update the currentMainDiv to the parent div of the clicked button
+  // Save the current main div (the page where the button was clicked)
   const activeButton = document.querySelector(`button[onclick="goToPassFailPage('${item}', ${skipReasons})"]`);
   if (activeButton) {
     const parentDiv = activeButton.closest("div[id]");
@@ -69,6 +66,9 @@ function goToPassFailPage(item, skipReasons = false) {
       currentMainDiv = parentDiv.id; // Update the currentMainDiv to the parent div's ID
     }
   }
+
+  console.log(`Navigating to PassFailPage for: ${item}`);
+  console.log(`Current main div: ${currentMainDiv}`);
 
   // Hide all main divs
   const mainDivs = document.querySelectorAll("#pages > div");
@@ -91,6 +91,9 @@ function goToPassFailPage(item, skipReasons = false) {
 
 // Mark as Pass
 function markPass() {
+  console.log(`Marking PASS for: ${currentInspectionItem}`);
+  console.log(`Returning to main div: ${currentMainDiv}`);
+
   // Hide the Pass/Fail page
   document.getElementById("PassFailPage").style.display = "none";
 
@@ -110,6 +113,9 @@ function markPass() {
 
 // Mark as Fail Directly
 function markFailDirect() {
+  console.log(`Marking FAIL for: ${currentInspectionItem}`);
+  console.log(`Returning to main div: ${currentMainDiv}`);
+
   // Hide the Pass/Fail page
   document.getElementById("PassFailPage").style.display = "none";
 
