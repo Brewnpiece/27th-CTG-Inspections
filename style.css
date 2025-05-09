@@ -259,6 +259,6 @@ html, body {
       box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
     }
     body, html {
-      padding-bottom: 70px; /* Prevent content from being hidden behind buttons */
+      padding-bottom: 200px; /* Prevent content from being hidden behind buttons */
     }
   }
