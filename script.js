@@ -2,6 +2,7 @@
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
 let previousPageId = null;
+let currentInspectionItem = null;
 
 function swipePage(direction) {
   // Hide the current page
@@ -28,7 +29,6 @@ function swipePage(direction) {
 
 //PASS/FAIL FUNCTIONALITY
 let currentMainDiv = "Uniform"; // Tracks the current main div
-let currentInspectionItem = ""; // Tracks the current inspection item
 
 // Save and Restore Scroll Position
 let savedScrollPosition = 0; // Variable to store the scroll position
@@ -54,51 +54,28 @@ function restoreScrollPosition() {
 }
 
 // Navigate to the shared Pass/Fail page
-function goToPassFailPage(itemName, special = false) {
-  // Find the currently visible page
-  const pages = ['Uniform', 'Bunk', 'Locker'];
-  for (let page of pages) {
-    if (document.getElementById(page).style.display === 'block') {
-      previousPageId = page;
-      break;
-    }
-  }
+function goToPassFailPage(itemName) {
+  // Hide all pages
+  document.getElementById('Uniform').style.display = 'none';
+  document.getElementById('Bunk').style.display = 'none';
+  document.getElementById('Locker').style.display = 'none';
+  document.getElementById('Data').style.display = 'none';
 
+  // Find and store the currently visible page
+  if (document.getElementById('Uniform').style.display === 'block') previousPageId = 'Uniform';
+  if (document.getElementById('Bunk').style.display === 'block') previousPageId = 'Bunk';
+  if (document.getElementById('Locker').style.display === 'block') previousPageId = 'Locker';
+  if (document.getElementById('Data').style.display === 'block') previousPageId = 'Data';
+
+  // Show PassFailPage
+  document.getElementById('PassFailPage').style.display = 'block';
+  document.getElementById('inspection-title').innerText = itemName;
   currentInspectionItem = itemName;
-
-  // Save the current scroll position
-  saveScrollPosition();
-
-  // Update the currentMainDiv to the parent div of the clicked button
-  const activeButton = document.querySelector(`button[onclick="goToPassFailPage('${itemName}', ${special})"]`);
-  if (activeButton) {
-    const parentDiv = activeButton.closest("div[id]");
-    if (parentDiv) {
-      currentMainDiv = parentDiv.id; // Update the currentMainDiv to the parent div's ID
-    }
-  }
-
-  // Hide all main divs
-  const mainDivs = document.querySelectorAll("#pages > div");
-  mainDivs.forEach((div) => {
-    div.style.display = "none";
-  });
-
-  // Show the Pass/Fail page
-  document.getElementById("PassFailPage").style.display = "block";
-  document.getElementById("inspection-title").innerText = `Inspecting: ${itemName}`;
-
-  // If special is true, update the "Fail" button to directly mark fail
-  const failButton = document.getElementById("fail-button");
-  if (special) {
-    failButton.onclick = () => markFailDirect();
-  } else {
-    failButton.onclick = () => goToFailReasonsPage();
-  }
 }
 
 // Mark as Pass
 function markPass() {
+  // ...your logic to record the result...
   document.getElementById('PassFailPage').style.display = 'none';
   if (previousPageId) {
     document.getElementById(previousPageId).style.display = 'block';
@@ -234,3 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
+
+// Do the same for your fail handler
+document.getElementById('fail-button').onclick = function() {
+  // ...your logic to record the result...
+  document.getElementById('PassFailPage').style.display = 'none';
+  if (previousPageId) {
+    document.getElementById(previousPageId).style.display = 'block';
+  }
+};
