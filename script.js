@@ -13,6 +13,10 @@ function swipePage(direction) {
   if (currentPageIndex < 0) currentPageIndex = 0;
   if (currentPageIndex >= pages.length) currentPageIndex = pages.length - 1;
 
+  // Update the currentMainDiv to the new page
+  currentMainDiv = pages[currentPageIndex];
+  console.log(`Swiped to page: ${currentMainDiv}`); // Debug log
+
   // Show the new page
   document.getElementById(pages[currentPageIndex]).style.display = "block";
 
