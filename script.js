@@ -2,6 +2,7 @@
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
 let previousPageId = null;
+let inspectionResults = {};
 
 function swipePage(direction) {
   // Hide the current page
@@ -76,6 +77,11 @@ function goToPassFailPage(itemName) {
 
 // Mark as Pass
 function markPass() {
+  if (currentInspectionItem) {
+    // Record the result as "Pass"
+    inspectionResults[currentInspectionItem] = "Pass";
+  }
+
   // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
 
@@ -83,7 +89,6 @@ function markPass() {
   if (previousPageId) {
     document.getElementById(previousPageId).style.display = 'block';
   } else {
-    // Fallback: Show the first page (e.g., ID page)
     document.getElementById('ID').style.display = 'block';
   }
 }
@@ -220,6 +225,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Fail button logic
 document.getElementById('fail-button').onclick = function () {
+  if (currentInspectionItem) {
+    // Record the result as "Fail"
+    inspectionResults[currentInspectionItem] = "Fail";
+
+    // Optionally, prompt for a reason
+    const reason = prompt(`Why did "${currentInspectionItem}" fail?`);
+    if (reason) {
+      inspectionResults[currentInspectionItem] += `: ${reason}`;
+    }
+  }
+
   // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
 
@@ -227,7 +243,7 @@ document.getElementById('fail-button').onclick = function () {
   if (previousPageId) {
     document.getElementById(previousPageId).style.display = 'block';
   } else {
-    // Fallback: Show the first page (e.g., ID page)
     document.getElementById('ID').style.display = 'block';
   }
 };
+
