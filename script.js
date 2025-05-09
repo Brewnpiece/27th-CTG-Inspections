@@ -1,7 +1,7 @@
 //PAGE SWIPER
 let currentPageIndex = 0;
 const pages = ["ID", "Uniform", "Bunk", "Locker", "Data", "DataSent"];
-let previousPageId = null;
+let previousPageId = null; // Tracks the previous page
 let inspectionResults = {};
 
 function swipePage(direction) {
@@ -32,7 +32,7 @@ let currentMainDiv = "Uniform"; // Tracks the current main div
 let currentInspectionItem = ""; // Tracks the current inspection item
 
 // Save and Restore Scroll Position
-let savedScrollPosition = 0; // Variable to store the scroll position
+let savedScrollPosition = 0; // Tracks the scroll position
 
 function saveScrollPosition() {
   const scrollableContainer = document.querySelector("#pages");
@@ -59,8 +59,18 @@ function goToPassFailPage(itemName) {
   // Store the current inspection item
   currentInspectionItem = itemName;
 
-  // Hide all pages
+  // Save the current page and scroll position
   const pages = ['ID', 'Uniform', 'Bunk', 'Locker', 'Data'];
+  for (let page of pages) {
+    const pageElement = document.getElementById(page);
+    if (pageElement.style.display === 'block') {
+      previousPageId = page;
+      savedScrollPosition = pageElement.scrollTop || window.scrollY;
+      break;
+    }
+  }
+
+  // Hide all pages
   pages.forEach(page => {
     document.getElementById(page).style.display = 'none';
   });
@@ -77,7 +87,7 @@ function markPass() {
     const containerId = `pass-fail-${currentInspectionItem}`;
     const container = document.getElementById(containerId);
     if (container) {
-      container.innerHTML = '<span style="color: green;">Pass</span>';
+      container.innerHTML = '<span style="color: green;">PASS</span>';
     }
 
     // Record the result as "Pass"
@@ -87,11 +97,12 @@ function markPass() {
   // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
 
-  // Show the previous page
+  // Show the previous page and restore scroll position
   if (previousPageId) {
-    document.getElementById(previousPageId).style.display = 'block';
-  } else {
-    document.getElementById('ID').style.display = 'block';
+    const previousPage = document.getElementById(previousPageId);
+    previousPage.style.display = 'block';
+    previousPage.scrollTop = savedScrollPosition;
+    window.scrollTo(0, savedScrollPosition);
   }
 }
 
@@ -141,20 +152,27 @@ function goToFailReasonsPage() {
 
 // Mark as Fail with a Reason
 function markFail(reason) {
-  // Hide the Fail Reasons page
-  document.getElementById("FailReasonsPage").style.display = "none";
+  // Hide the FailReasonsPage
+  document.getElementById('FailReasonsPage').style.display = 'none';
 
-  // Show the main div
-  document.getElementById(currentMainDiv).style.display = "block";
+  // Update the pass-fail container with "Fail" and the reason
+  if (currentInspectionItem) {
+    const containerId = `pass-fail-${currentInspectionItem}`;
+    const container = document.getElementById(containerId);
+    if (container) {
+      container.innerHTML = `<span style="color: red;">FAIL</span>: ${reason}`;
+    }
 
-  // Restore the scroll position
-  restoreScrollPosition();
+    // Record the result as "Fail" with the reason
+    inspectionResults[currentInspectionItem] = `Fail: ${reason}`;
+  }
 
-  // Add red "FAIL: (reason)" text to the pass-fail container
-  const passFailContainer = document.getElementById(`pass-fail-${currentInspectionItem}`);
-  if (passFailContainer) {
-    passFailContainer.innerText = `FAIL: (${reason})`;
-    passFailContainer.style.color = "red";
+  // Show the previous page and restore scroll position
+  if (previousPageId) {
+    const previousPage = document.getElementById(previousPageId);
+    previousPage.style.display = 'block';
+    previousPage.scrollTop = savedScrollPosition;
+    window.scrollTo(0, savedScrollPosition);
   }
 }
 
@@ -227,26 +245,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Fail button logic
 document.getElementById('fail-button').onclick = function () {
-  if (currentInspectionItem) {
-    // Update the pass-fail container with "Fail"
-    const containerId = `pass-fail-${currentInspectionItem}`;
-    const container = document.getElementById(containerId);
-    if (container) {
-      const reason = prompt(`Why did "${currentInspectionItem}" fail?`);
-      container.innerHTML = `<span style="color: red;">Fail</span>${reason ? `: ${reason}` : ''}`;
-    }
-
-    // Record the result as "Fail"
-    inspectionResults[currentInspectionItem] = reason ? `Fail: ${reason}` : "Fail";
-  }
-
   // Hide the PassFailPage
   document.getElementById('PassFailPage').style.display = 'none';
 
-  // Show the previous page
-  if (previousPageId) {
-    document.getElementById(previousPageId).style.display = 'block';
-  } else {
-    document.getElementById('ID').style.display = 'block';
-  }
+  // Show the FailReasonsPage
+  const failReasonsPage = document.getElementById('FailReasonsPage');
+  failReasonsPage.style.display = 'block';
+
+  // Clear existing fail reasons
+  failReasonsPage.innerHTML = "<h1>Fail Reasons</h1>";
+
+  // Get the fail reasons for the current inspection item
+  const reasons = failReasons[currentInspectionItem] || ["No reasons available"];
+
+  // Dynamically create buttons for each fail reason
+  reasons.forEach(reason => {
+    const button = document.createElement('button');
+    button.className = 'reason-button';
+    button.innerText = reason;
+    button.onclick = () => markFail(reason); // Pass the reason to the markFail function
+    failReasonsPage.appendChild(button);
+  });
 };
+
