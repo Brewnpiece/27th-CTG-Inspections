@@ -226,14 +226,8 @@ form.addEventListener('submit', e => {
     .then(data => {
       console.log('Success!', data);
 
-      // Debug log before reloading
-      console.log('Page will reload in 4 seconds.');
-
-      // Reload the page after 4 seconds
-      setTimeout(() => {
-        location.reload();
-      }
-    )
+  location.reload();
+    })
     .catch(error => {
       console.error('Error!', error.message);
     });
