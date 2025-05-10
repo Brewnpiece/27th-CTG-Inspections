@@ -226,12 +226,18 @@ form.addEventListener('submit', e => {
     .then(data => {
       console.log('Success!', data);
 
+      // Debug log before reloading
+      console.log('Page will reload in 4 seconds.');
+
       // Reload the page after 4 seconds
       setTimeout(() => {
+        console.log('Reloading the page now...');
         location.reload();
       }, 4000); // 4000 milliseconds = 4 seconds
     })
-    .catch(error => console.error('Error!', error.message));
+    .catch(error => {
+      console.error('Error!', error.message);
+    });
 });
 
 // Function to filter inspection buttons based on the selected inspection type
