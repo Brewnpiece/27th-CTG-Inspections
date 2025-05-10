@@ -194,8 +194,11 @@ const failReasons = {
   "Belt" : ["Not Present", "Not Centered"],
   "Trousers": ["Iron", "Strings", "Pockets"],
   "Boots": ["Shine", "Laces"],
-  "Attention" : ["Eyes", "Hands", "Grounded/Heels"]
-  
+  "Attention" : ["Eyes", "Hands", "Grounded/Heels"],
+  "Pillow" : ["Centered", "Flush", "Tight"],
+  "Luggage" : ["Grounded", "Centered", "Straps"],
+  "Shelf" : ["Items", "Door"],
+  "PT Shoes" : ["Laces", "Centered", "Flush"],
 };
 
 //FORM
@@ -231,7 +234,7 @@ function filterItemsByInspectionType() {
   const visibilityMap = {
     ABU: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (Blues)", "Trousers (Blues)", "Shoes (Blues)", "Locker"],
     Blues: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Accoutrements", "Blouse", "Belt", "Gig Line", "Trousers", "Shoes", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (ABU)", "Trousers (ABU)", "Boots (ABU)", "Locker"],
-    PT: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf/Cover", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
+    PT: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
   };
 
   // Hide all buttons and pass/fail containers initially
