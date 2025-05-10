@@ -272,14 +272,14 @@ function prepareFormData() {
   const passFailContainers = document.querySelectorAll('.pass-fail-container');
 
   passFailContainers.forEach(container => {
-    const id = container.id; // e.g., "pass-fail-Cover"
+    const id = container.id.replace('pass-fail-', ''); // Remove the "pass-fail-" prefix
     const value = container.textContent.trim(); // Get the text content
 
     if (value) {
       // Create a hidden input
       const input = document.createElement('input');
       input.type = 'hidden';
-      input.name = id; // Use the container ID as the input name
+      input.name = id; // Use the cleaned ID as the input name
       input.value = value;
       input.classList.add('pass-fail-input'); // Add a class for easy removal later
 
