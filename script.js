@@ -221,7 +221,14 @@ form.addEventListener('submit', e => {
   // Submit the form using fetch
   fetch(scriptURL, { method: 'POST', body: formData })
     .then(response => response.json())
-    .then(data => console.log('Success!', data))
+    .then(data => {
+      console.log('Success!', data);
+
+      // Reload the page after 4 seconds
+      setTimeout(() => {
+        location.reload();
+      }, 4000); // 4000 milliseconds = 4 seconds
+    })
     .catch(error => console.error('Error!', error.message));
 });
 
