@@ -187,7 +187,7 @@ function markFail(reason) {
 
 // 
 const failReasons = {
-  "Cover": ["Strings, Not Parallel"],
+  "Cover": ["Strings", "Not Parallel"],
   "Hair": ["Touches Ears", "Touches Collar", "Loose/Flyaways"],
   "Shave/Cosmetics": ["Shaving", "Cosmetics"],
   "Insignia": ["Not Parallel", "Not Centered", "Distance"],
