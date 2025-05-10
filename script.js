@@ -201,8 +201,23 @@ const failReasons = {
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxMLLnXk-VmoBrNur-TNqDKfduDzTUoujFtWQSCE-IDmTnveqSLBDAR4Ys9s4BHE6ZF3w/exec'
 const form = document.forms['submit-to-google-sheet']
 
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  // Prepare the form data
   prepareFormData();
+
+  // Log the FormData being sent
+  const formData = new FormData(form);
+  for (let [key, value] of formData.entries()) {
+    console.log(`FormData: ${key} = ${value}`);
+  }
+
+  // Submit the form using fetch
+  fetch(scriptURL, { method: 'POST', body: formData })
+    .then(response => response.json())
+    .then(data => console.log('Success!', data))
+    .catch(error => console.error('Error!', error.message));
 });
 
 // Function to filter inspection buttons based on the selected inspection type
@@ -249,11 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function prepareFormData() {
   const form = document.forms['submit-to-google-sheet'];
 
-  if (!form) {
-    console.error('Form "submit-to-google-sheet" not found.');
-    return;
-  }
-
   // Remove any existing hidden inputs for pass-fail data
   const existingInputs = form.querySelectorAll('.pass-fail-input');
   existingInputs.forEach(input => input.remove());
@@ -277,14 +287,4 @@ function prepareFormData() {
       form.appendChild(input);
     }
   });
-
-  // Add the timestamp to the form (before submitting)
-  const timestampInput = document.createElement('input');
-  timestampInput.type = 'hidden';
-  timestampInput.name = 'timestamp'; // Name should match your Google Sheet column header
-  timestampInput.value = new Date().toISOString(); // Current timestamp in ISO format
-  timestampInput.classList.add('pass-fail-input'); // Optional: mark for removal next time
-  form.appendChild(timestampInput);
-
-  console.log('Form data prepared with timestamp:', timestampInput.value);
 }
