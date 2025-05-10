@@ -158,6 +158,7 @@ function goToFailReasonsPage() {
     const button = document.createElement("button");
     button.className = "reason-button";
     button.innerText = reason;
+    button.type="button";
     button.onclick = () => markFail(reason); // Pass the reason to the markFail function
     failReasonsPage.appendChild(button);
   });
