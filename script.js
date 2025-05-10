@@ -285,6 +285,9 @@ function prepareFormData() {
 
       // Append the hidden input to the form
       form.appendChild(input);
+
+      // Log the created input for debugging
+      console.log(`Created hidden input: name=${input.name}, value=${input.value}`);
     }
   });
 }
