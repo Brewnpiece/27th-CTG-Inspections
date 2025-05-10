@@ -143,6 +143,8 @@ function goToFailReasonsPage() {
   // Hide the Pass/Fail page
   document.getElementById("PassFailPage").style.display = "none";
 
+saveScrollPosition();
+
   // Show the Fail Reasons page
   const failReasonsPage = document.getElementById("FailReasonsPage");
   failReasonsPage.style.display = "block";
