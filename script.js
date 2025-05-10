@@ -198,7 +198,7 @@ const failReasons = {
 };
 
 //FORM
-const scriptURL = 'https://script.google.com/macros/s/AKfycbxMLLnXk-VmoBrNur-TNqDKfduDzTUoujFtWQSCE-IDmTnveqSLBDAR4Ys9s4BHE6ZF3w/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwebNi6Rq2LmMma45YuqhcXKfeGs4CvSoATZ6zwJgpcICcafibavLoJb5LSM8TCy5YZ/exec'
 const form = document.forms['submit-to-google-sheet']
 
 form.addEventListener('submit', e => {
