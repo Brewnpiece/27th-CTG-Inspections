@@ -72,6 +72,8 @@ function goToPassFailPage(item, skipReasons = false) {
     }
   }
 
+saveScrollPosition();
+
   console.log(`Navigating to PassFailPage for: ${item}`);
   console.log(`Current main div: ${currentMainDiv}`);
 
@@ -142,8 +144,6 @@ function markFailDirect() {
 function goToFailReasonsPage() {
   // Hide the Pass/Fail page
   document.getElementById("PassFailPage").style.display = "none";
-
-saveScrollPosition();
 
   // Show the Fail Reasons page
   const failReasonsPage = document.getElementById("FailReasonsPage");
