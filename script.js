@@ -199,6 +199,7 @@ const failReasons = {
   "Luggage" : ["Grounded", "Centered", "Straps"],
   "Shelf" : ["Items", "Door"],
   "PT Shoes" : ["Laces", "Centered", "Flush"],
+   "Sleeping Bag" : ["Zipped", "Centered", "Bulges"]
 };
 
 //FORM
