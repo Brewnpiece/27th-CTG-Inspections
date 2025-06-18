@@ -15,14 +15,31 @@
       <h1>27th CTG Inspection Form</h1>
       <br>
 
-            <h3>Inspection Type</h3>
-          <select name="Type" id="inspection-type" onchange="filterItemsByInspectionType()">
+            <h3>Inspection One</h3>
+          <select name="Type" id="inspection-type" onchange="filterItemsByInspectionType()" disabled>
               <option value="ABU" selected>ABU</option>
               <option value="Blues">Blues</option>
               <option value="PT">PT</option>
           </select>
 
-          <h3>Cadet CAPID</h3>
+          <br>
+
+                      <h3>Flight</h3>
+          <select name="Type" id="inspection-type" onchange="filterItemsByInspectionType()" >
+              <option selected>Alpha</option>
+              <option selected>Bravo</option>
+              <option selected>Charlie</option>
+              <option selected>Delta</option>
+              <option selected>Echo</option>
+              <option selected>Foxtrot</option>
+              <option selected>Golf</option>
+              <option selected>Hotel</option>
+              <option selected>India</option>
+          </select>
+
+          <br>
+
+          <h3>Cadet ID</h3>
           <input name="CAPID" type="text" id="match-number">
           <div class="container2">
             <button class="updater" onclick="swipePage(-1)" type="Button">Prev</button>
