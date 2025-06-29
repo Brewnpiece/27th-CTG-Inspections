@@ -206,7 +206,8 @@ const failReasons = {
    "Cuff" : ["Wrinkles", "Bulges", "Tuck", "Measurement"],
    "Blanket" : ["Wrinkles", "Bulges", "Tuck"],
    "Shelf/Cover" : ["Orientation/Placement", "Door"],
-   "Shoes" : ["Laces", "Centered", "Flush"]
+   "Shoes" : ["Laces", "Centered", "Flush"],
+   "Hospital Corners" : ["Not 45", "Wrinkles", "Shallow"]
    
 };
 
