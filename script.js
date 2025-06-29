@@ -201,7 +201,13 @@ const failReasons = {
   "Luggage" : ["Grounded", "Centered", "Straps"],
   "Shelf" : ["Items", "Door"],
   "PT Shoes" : ["Laces", "Centered", "Flush"],
-   "Sleeping Bag" : ["Zipped", "Centered", "Bulges"]
+   "Sleeping Bag" : ["Zipped", "Centered", "Bulges"],
+   "Sheet" : ["Wrinkles", "Bulges", "Tuck"],
+   "Cuff" : ["Wrinkles", "Bulges", "Tuck", "Measurement"],
+   "Blanket" : ["Wrinkles", "Bulges", "Tuck"],
+   "Shelf/Cover" : ["Orientation/Placement", "Door"],
+   "Shoes" : ["Laces", "Centered", "Flush"]
+   
 };
 
 //FORM
