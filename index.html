@@ -17,8 +17,8 @@
 
             <h3>Inspection One</h3>
           <select name="Type" id="inspection-type" onchange="filterItemsByInspectionType()" disabled>
-              <option value="ABU" selected>ABU</option>
-              <option value="Blues">Blues</option>
+              <option value="ABU">ABU</option>
+              <option value="Blues" selected>Blues</option>
               <option value="PT">PT</option>
           </select>
 
@@ -35,35 +35,35 @@
     <div id="Uniform" style="display: none;">
       <h1>Uniform</h1>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Cover')">Cover</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Cover', true)">Cover</button>
         <div  class="pass-fail-container" id="pass-fail-Cover"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Hair')">Hair</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Hair', true)">Hair</button>
         <div  class="pass-fail-container" id="pass-fail-Hair"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Shave/Cosmetics')">Shave/Cosmetics</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Shave/Cosmetics', true)">Shave/Cosmetics</button>
         <div  class="pass-fail-container" id="pass-fail-Shave/Cosmetics"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Insignia')">Insignia</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Insignia', true)">Insignia</button>
         <div class="pass-fail-container" id="pass-fail-Insignia"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Accoutrements')">Accoutrements</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Accoutrements', true)">Accoutrements</button>
         <div class="pass-fail-container" id="pass-fail-Accoutrements"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Patches/Tapes')">Patches/Tapes</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Patches/Tapes', true)">Patches/Tapes</button>
         <div class="pass-fail-container" id="pass-fail-Patches/Tapes"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Blouse')">Blouse</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Blouse', true)">Blouse</button>
         <div class="pass-fail-container" id="pass-fail-Blouse"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Belt')">Belt</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Belt', true)">Belt</button>
         <div class="pass-fail-container" id="pass-fail-Belt"></div>
       </div>
       <div>
@@ -71,7 +71,7 @@
         <div class="pass-fail-container" id="pass-fail-Gig Line"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Trousers')">Trousers</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Trousers', true)">Trousers</button>
         <div class="pass-fail-container" id="pass-fail-Trousers"></div>
       </div>
       <div>
@@ -79,15 +79,15 @@
         <div class="pass-fail-container" id="pass-fail-Boot Blousing"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Boots')">Boots</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Boots', true)">Boots</button>
         <div class="pass-fail-container" id="pass-fail-Boots"></div>
       </div>
       <div>
-      <button type="button" class="inspection-button" onclick="goToPassFailPage('Shoes')">Shoes</button>
+      <button type="button" class="inspection-button" onclick="goToPassFailPage('Shoes', true)">Shoes</button>
       <div class="pass-fail-container" id="pass-fail-Shoes"></div>
       </div>
       <div>
-       <button type="button" class="inspection-button" onclick="goToPassFailPage('Attention')">Attention</button>
+       <button type="button" class="inspection-button" onclick="goToPassFailPage('Attention', true)">Attention</button>
        <div class="pass-fail-container" id="pass-fail-Attention"></div>
      </div>
 
@@ -101,27 +101,27 @@
     <div id="Bunk" style="display: none;">
       <h1>Bunk</h1>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Sheet')">Sheet</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Sheet', true)">Sheet</button>
         <div class="pass-fail-container" id="pass-fail-Sheet"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Cuff')">Cuff</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Cuff', true)">Cuff</button>
         <div class="pass-fail-container" id="pass-fail-Cuff"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Blanket')">Blanket</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Blanket', true)">Blanket</button>
         <div class="pass-fail-container" id="pass-fail-Blanket"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Hospital Corners')">Hospital Corners</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Hospital Corners', true)">Hospital Corners</button>
         <div class="pass-fail-container" id="pass-fail-Hospital Corners"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Pillow')">Pillow</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Pillow', true)">Pillow</button>
         <div class="pass-fail-container" id="pass-fail-Pillow"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Sleeping Bag')">Sleeping Bag</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Sleeping Bag', true)">Sleeping Bag</button>
         <div class="pass-fail-container" id="pass-fail-Sleeping Bag"></div>
       </div>
       <div>
@@ -158,11 +158,11 @@
     <div id="Locker" style="display: none;">
       <h1>Locker</h1>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('Shelf/Cover')">Shelf/Cover</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('Shelf/Cover', true)">Shelf/Cover</button>
         <div class="pass-fail-container" id="pass-fail-Shelf/Cover"></div>
       </div>
       <div>
-      <button type="button" class="inspection-button" onclick="goToPassFailPage('Shelf')">Shelf</button>
+      <button type="button" class="inspection-button" onclick="goToPassFailPage('Shelf', true)">Shelf</button>
       <div class="pass-fail-container" id="pass-fail-Shelf"></div>
     </div>
       <div>
@@ -206,7 +206,7 @@
         <div class="pass-fail-container" id="pass-fail-Boots (ABU)"></div>
       </div>
       <div>
-        <button type="button" class="inspection-button" onclick="goToPassFailPage('PT Shoes')">PT Shoes</button>
+        <button type="button" class="inspection-button" onclick="goToPassFailPage('PT Shoes', true)">PT Shoes</button>
         <div class="pass-fail-container" id="pass-fail-PT Shoes"></div>
       </div>
       <div>

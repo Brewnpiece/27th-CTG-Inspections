@@ -212,7 +212,7 @@ const failReasons = {
 };
 
 //FORM
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzqu0opwK1xSIyTWlvmojxg-An4fsvfdz05T46JdhTpprgn8PMZ2ljzsfhH0OQKVsIgUQ/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbz52Lc4iwkpz01u9TZCZt206lev-2C3Xvk3FAO4jS1wqDLuKmY0iXFH85eLNHiG3LoxGg/exec'
 const form = document.forms['submit-to-google-sheet']
 
 form.addEventListener('submit', e => {
@@ -277,7 +277,7 @@ function filterItemsByInspectionType() {
 
 // Call filterItemsByInspectionType on page load to set ABU as the default
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("inspection-type").value = "ABU"; // Set ABU as the default value
+  document.getElementById("inspection-type").value = "Blues"; // Set ABU as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
 
