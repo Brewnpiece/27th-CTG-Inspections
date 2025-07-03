@@ -261,3 +261,8 @@ div {
   text-align: center;
   font-weight: bold;
 }
+
+.bottom-buffer {
+  height: 80px; /* Adjust as needed for your UI and keyboard */
+  width: 100%;
+}

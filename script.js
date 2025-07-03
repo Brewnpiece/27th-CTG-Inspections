@@ -313,12 +313,10 @@ function prepareFormData() {
 }
 
 function selectPassFail(btn, item, isPass) {
-  // Find both buttons for this item
+  // Remove selection from both buttons for this item
   const parent = btn.parentElement;
   const buttons = parent.querySelectorAll('.pass-or-fail');
   buttons.forEach(b => b.classList.remove('selected-passfail'));
-
-  // Mark the clicked button as selected
   btn.classList.add('selected-passfail');
 
   // Store the result in a hidden input for form submission
@@ -331,6 +329,19 @@ function selectPassFail(btn, item, isPass) {
     btn.form.appendChild(input);
   }
   input.value = isPass ? 'PASS' : 'FAIL';
+
+  // --- Scroll next inspection-item into view if needed ---
+  // Only do this if the current item is near the bottom of the viewport
+  const allItems = Array.from(document.querySelectorAll('.inspection-item'));
+  const currentIndex = allItems.indexOf(parent);
+  if (currentIndex !== -1) {
+    const rect = parent.getBoundingClientRect();
+    const buffer = 120; // px from bottom before auto-scroll triggers
+    if (rect.bottom > window.innerHeight - buffer) {
+      // Scroll the current item to the very top of the viewport
+      parent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }
 
 function showUniformPage() {
