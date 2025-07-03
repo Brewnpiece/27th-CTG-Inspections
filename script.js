@@ -97,21 +97,8 @@ saveScrollPosition();
 }
 
 // Mark as Pass
-function markPass() {
-  console.log(`Marking PASS for: ${currentInspectionItem}`);
-  console.log(`Returning to main div: ${currentMainDiv}`);
-
-  // Hide the Pass/Fail page
-  document.getElementById("PassFailPage").style.display = "none";
-
-  // Show the main div
-  document.getElementById(currentMainDiv).style.display = "block";
-
-  // Restore the scroll position
-  restoreScrollPosition();
-
-  // Add green "PASS" text to the pass-fail container
-  const passFailContainer = document.getElementById(`pass-fail-${currentInspectionItem}`);
+function markPass(item) {
+  const passFailContainer = document.getElementById(`pass-fail-${item}`);
   if (passFailContainer) {
     passFailContainer.innerText = "PASS";
     passFailContainer.style.color = "green";
@@ -119,21 +106,8 @@ function markPass() {
 }
 
 // Mark as Fail Directly
-function markFailDirect() {
-  console.log(`Marking FAIL for: ${currentInspectionItem}`);
-  console.log(`Returning to main div: ${currentMainDiv}`);
-
-  // Hide the Pass/Fail page
-  document.getElementById("PassFailPage").style.display = "none";
-
-  // Show the main div
-  document.getElementById(currentMainDiv).style.display = "block";
-
-  // Restore the scroll position
-  restoreScrollPosition();
-
-  // Add red "FAIL" text to the pass-fail container
-  const passFailContainer = document.getElementById(`pass-fail-${currentInspectionItem}`);
+function markFailDirect(item) {
+  const passFailContainer = document.getElementById(`pass-fail-${item}`);
   if (passFailContainer) {
     passFailContainer.innerText = "FAIL";
     passFailContainer.style.color = "red";
@@ -227,16 +201,42 @@ form.addEventListener('submit', e => {
     console.log(`FormData: ${key} = ${value}`);
   }
 
-  // Submit the form using fetch
+  // --- IMMEDIATE UI RESET ---
+  // Hide all pages
+  pages.forEach(pageId => {
+    const pageDiv = document.getElementById(pageId);
+    if (pageDiv) pageDiv.style.display = "none";
+  });
+
+  // Show the DataSent page
+  document.getElementById("DataSent").style.display = "block";
+
+  // Very short delay, then reset UI for next user
+  setTimeout(() => {
+    document.getElementById("DataSent").style.display = "none";
+    pages.forEach(pageId => {
+      const pageDiv = document.getElementById(pageId);
+      if (pageDiv) pageDiv.style.display = (pageId === "ID") ? "block" : "none";
+    });
+    form.reset();
+    document.querySelectorAll('.selected-passfail').forEach(btn => btn.classList.remove('selected-passfail'));
+    currentPageIndex = 0;
+    currentMainDiv = "Uniform";
+    window.scrollTo(0, 0);
+    document.getElementById("inspection-type").value = "Blues";
+    filterItemsByInspectionType();
+  }, 100); // 0.1 seconds
+
+  // --- ASYNC SEND TO GOOGLE SHEETS ---
   fetch(scriptURL, { method: 'POST', body: formData })
     .then(response => response.json())
     .then(data => {
       console.log('Success!', data);
-
-  location.reload();
+      // No UI reset here, already done above
     })
     .catch(error => {
       console.error('Error!', error.message);
+      // Optionally show an error message to the user
     });
 });
 
@@ -310,4 +310,46 @@ function prepareFormData() {
       console.log(`Created hidden input: name=${input.name}, value=${input.value}`);
     }
   });
+}
+
+function selectPassFail(btn, item, isPass) {
+  // Find both buttons for this item
+  const parent = btn.parentElement;
+  const buttons = parent.querySelectorAll('.pass-or-fail');
+  buttons.forEach(b => b.classList.remove('selected-passfail'));
+
+  // Mark the clicked button as selected
+  btn.classList.add('selected-passfail');
+
+  // Store the result in a hidden input for form submission
+  let input = document.getElementById(`input-passfail-${item}`);
+  if (!input) {
+    input = document.createElement('input');
+    input.type = 'hidden';
+    input.id = `input-passfail-${item}`;
+    input.name = item;
+    btn.form.appendChild(input);
+  }
+  input.value = isPass ? 'PASS' : 'FAIL';
+}
+
+function showUniformPage() {
+  document.getElementById("ID").style.display = "none";
+  document.getElementById("Uniform").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function submitUniformForm() {
+  prepareFormData();
+  document.getElementById("Uniform").style.display = "none";
+  document.getElementById("Data").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function submitAndReload(e) {
+  e.preventDefault();
+  prepareFormData();
+
+  // Manually trigger the form's submit event so the fetch handler runs
+  form.dispatchEvent(new Event('submit', { cancelable: true }));
 }

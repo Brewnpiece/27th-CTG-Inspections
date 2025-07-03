@@ -174,19 +174,15 @@ div {
 }
 
 .pass-or-fail {
-    width: 90%;
-    height: 40%;
-    font-size: 24px;
-    border: 2px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: center;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto;
+  margin: 0 10px;
+  min-width: 150px;    /* Increased width */
+  min-height: 48px;    /* Slightly taller */
+  font-size: 1.1em;
+  border-radius: 6px;
+  border: 2px solid #bbb;
+  background: #f5f5f5;
+  color: #222;
+  transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
 .pass-or-fail:hover {
@@ -228,4 +224,40 @@ div {
 #pages {
     height: 100vh;
     overflow-y: auto;
+}
+
+.item-label {
+  display: block;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.inspection-item {
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.pass-or-fail.selected-passfail {
+  background-color: #1976d2;
+  color: #fff;
+  box-shadow: inset 2px 2px 6px #0d47a1;
+}
+
+.pass-or-fail.selected-passfail.pass-btn {
+  background: #43a047;
+  color: #fff;
+  border-color: #388e3c;
+}
+
+.pass-or-fail.selected-passfail.fail-btn {
+  background: #e53935;
+  color: #fff;
+  border-color: #b71c1c;
+}
+
+.updater {
+  text-align: center;
+  font-weight: bold;
 }
