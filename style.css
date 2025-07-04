@@ -265,3 +265,21 @@ div {
   height: 80px; /* Adjust as needed for your UI and keyboard */
   width: 100%;
 }
+.pass-fail-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px; /* space between buttons */
+  margin-bottom: 12px;
+}
+
+.pass-fail-container .item-label {
+  flex-basis: 100%;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.pass-fail-container .pass-or-fail {
+  flex: 1 1 45%; /* Makes buttons sit side by side on small screens */
+  min-width: 100px;
+}
