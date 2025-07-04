@@ -283,3 +283,13 @@ div {
   flex: 1 1 45%; /* Makes buttons sit side by side on small screens */
   min-width: 100px;
 }
+
+@media (max-width: 600px) {
+  .pass-fail-container {
+    flex-wrap: wrap;
+  }
+
+  .pass-fail-container .pass-or-fail {
+    flex: 1 1 45%;
+  }
+}
