@@ -1,6 +1,5 @@
 html, body {
     height: 100%;
-    overflow: hidden;
     padding-bottom: 70px;
 }
 
@@ -222,7 +221,7 @@ div {
 }
 
 #pages {
-    height: 100vh;
+    min-height: 100vh; /* Change from height to min-height */
     overflow-y: auto;
 }
 
