@@ -223,7 +223,7 @@ form.addEventListener('submit', e => {
     currentPageIndex = 0;
     currentMainDiv = "Uniform";
     window.scrollTo(0, 0);
-    document.getElementById("inspection-type").value = "Blues";
+    document.getElementById("inspection-type").value = "ABUS";
     filterItemsByInspectionType();
   }, 100); // 0.1 seconds
 
@@ -248,7 +248,7 @@ function filterItemsByInspectionType() {
 
   // Define which buttons and pass/fail boxes should be visible for each inspection type
   const visibilityMap = {
-    ABU: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (Blues)", "Trousers (Blues)", "Shoes (Blues)", "Locker"],
+    ABUS: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (Blues)", "Trousers (Blues)", "Shoes (Blues)", "Locker"],
     Blues: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Accoutrements", "Blouse", "Belt", "Gig Line", "Trousers", "Shoes", "Attention", "Sheet", "Cuff", "Blanket", "Hospital Corners", "Pillow", "Mattress", "Canteen", "Footwear", "Luggage", "Bed Frame", "Shelf/Cover", "Hangers", "Towel", "Blouse (ABU)", "Trousers (ABU)", "Boots (ABU)", "Locker"],
     PT: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
   };
@@ -264,7 +264,10 @@ function filterItemsByInspectionType() {
   // Show buttons and their corresponding pass/fail containers based on the selected inspection type
   const visibleItems = visibilityMap[inspectionType] || [];
   visibleItems.forEach((item) => {
-    const button = document.querySelector(`button[onclick*="goToPassFailPage('${item}'"]`);
+    let button = document.querySelector(`button[onclick*="goToPassFailPage('${item}'"]`);
+    if (!button) {
+      button = document.querySelector(`button[onclick*='goToPassFailPage("${item}"']`);
+    }
     const container = document.getElementById(`pass-fail-${item}`);
     if (button) {
       button.style.display = "block";
@@ -277,7 +280,7 @@ function filterItemsByInspectionType() {
 
 // Call filterItemsByInspectionType on page load to set ABU as the default
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("inspection-type").value = "Blues"; // Set ABU as the default value
+  document.getElementById("inspection-type").value = "ABUS"; // Set ABUS as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
 
