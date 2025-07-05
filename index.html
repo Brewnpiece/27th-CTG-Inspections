@@ -15,10 +15,10 @@
       <h1>27th CTG Inspection Form</h1>
       <br>
 
-            <h3>Inspection Three</h3>
+            <h3>Group Inspection</h3>
           <select name="Type" id="inspection-type" onchange="filterItemsByInspectionType()">
-    <option value="ABUS" selected>ABU</option>
-    <option value="Blues">Blues</option>
+    <option value="Blues" selected>Blues</option>
+    <option value="ABU" >ABU</option>
     <option value="PT">PT</option>
 </select>
 
@@ -34,151 +34,213 @@
 
     <div id="Uniform" style="display: none;">
       <h1>Inspection</h1>
+
+
       <div class="inspection-item pass-fail-container" id="pass-fail-Cover">
     <span class="item-label">Cover</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Cover', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Cover', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Hair">
     <span class="item-label">Hair</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Hair', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Hair', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Shave/Cosmetics">
     <span class="item-label">Shave/Cosmetics</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Shave/Cosmetics', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Shave/Cosmetics', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Insignia">
     <span class="item-label">Insignia</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Insignia', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Insignia', false)">Fail</button>
   </div>
+
+    <div class="inspection-item pass-fail-container" id="pass-fail-Accoutrements">
+    <span class="item-label">Accoutrements</span>
+    <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Accoutrements', true)">Pass</button>
+    <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Accoutrements', false)">Fail</button>
+  </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Patches/Tapes">
     <span class="item-label">Patches/Tapes</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Patches/Tapes', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Patches/Tapes', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Blouse">
     <span class="item-label">Blouse</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Blouse', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Blouse', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Belt">
     <span class="item-label">Belt</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Belt', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Belt', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Gig Line">
     <span class="item-label">Gig Line</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Gig Line', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Gig Line', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Trousers">
     <span class="item-label">Trousers</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Trousers', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Trousers', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Boot Blousing">
     <span class="item-label">Boot Blousing</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Boot Blousing', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Boot Blousing', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Boots">
     <span class="item-label">Boots</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Boots', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Boots', false)">Fail</button>
   </div>
+
+    <div class="inspection-item pass-fail-container" id="pass-fail-Shoes">
+    <span class="item-label">Shoes</span>
+    <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Shoes', true)">Pass</button>
+    <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Shoes', false)">Fail</button>
+  </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Attention">
     <span class="item-label">Attention</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Attention', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Attention', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Sheet">
     <span class="item-label">Sheet</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Sheet', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Sheet', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Cuff">
     <span class="item-label">Cuff</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Cuff', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Cuff', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Blanket">
     <span class="item-label">Blanket</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Blanket', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Blanket', false)">Fail</button>
   </div>
+  
   <div class="inspection-item pass-fail-container" id="pass-fail-Hospital Corners">
     <span class="item-label">Hospital Corners</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Hospital Corners', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Hospital Corners', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Pillow">
     <span class="item-label">Pillow</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Pillow', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Pillow', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Mattress">
     <span class="item-label">Mattress</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Mattress', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Mattress', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Canteen">
     <span class="item-label">Canteen</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Canteen', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Canteen', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Footwear">
     <span class="item-label">Footwear</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Footwear', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Footwear', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Luggage">
     <span class="item-label">Luggage</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Luggage', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Luggage', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Bed Frame">
     <span class="item-label">Bed Frame</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Bed Frame', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Bed Frame', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Shelf/Cover">
     <span class="item-label">Shelf/Cover</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Shelf/Cover', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Shelf/Cover', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Hangers">
     <span class="item-label">Hangers</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Hangers', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Hangers', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Towel">
     <span class="item-label">Towel</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Towel', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Towel', false)">Fail</button>
   </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Blouse (Blues)">
     <span class="item-label">Blouse (Blues)</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Blouse (Blues)', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Blouse (Blues)', false)">Fail</button>
   </div>
+
+    <div class="inspection-item pass-fail-container" id="pass-fail-Blouse (ABU)">
+    <span class="item-label">Blouse (ABU)</span>
+    <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Blouse (ABU)', true)">Pass</button>
+    <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Blouse (ABU)', false)">Fail</button>
+  </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Trousers (Blues)">
     <span class="item-label">Trousers (Blues)</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Trousers (Blues)', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Trousers (Blues)', false)">Fail</button>
   </div>
+
+    <div class="inspection-item pass-fail-container" id="pass-fail-Trousers (ABU)">
+    <span class="item-label">Trousers (ABU)</span>
+    <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Trousers (ABU)', true)">Pass</button>
+    <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Trousers (ABU)', false)">Fail</button>
+  </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Shoes (Blues)">
     <span class="item-label">Shoes (Blues)</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Shoes (Blues)', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Shoes (Blues)', false)">Fail</button>
   </div>
+
+    <div class="inspection-item pass-fail-container" id="pass-fail-Boots (ABU)">
+    <span class="item-label">Boots (ABU)</span>
+    <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Boots (ABU)', true)">Pass</button>
+    <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Boots (ABU)', false)">Fail</button>
+  </div>
+
   <div class="inspection-item pass-fail-container" id="pass-fail-Locker">
     <span class="item-label">Locker</span>
     <button type="button" class="pass-or-fail pass-btn" onclick="selectPassFail(this, 'Locker', true)">Pass</button>
     <button type="button" class="pass-or-fail fail-btn" onclick="selectPassFail(this, 'Locker', false)">Fail</button>
-  </div>      <div style="text-align:center; margin-top: 32px; margin-bottom: 120px;">
+  </div>   
+  
+  <div style="text-align:center; margin-top: 32px; margin-bottom: 120px;">
   <button 
     type="submit" 
     class="updater" 

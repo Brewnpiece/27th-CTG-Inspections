@@ -186,7 +186,7 @@ const failReasons = {
 };
 
 //FORM
-const scriptURL = 'https://script.google.com/macros/s/AKfycbwwM8GUy7-AO_YTMCM_U41SKi0IjhUETGm0Idj4Zl-t3mCNFoi09NVpHK_py23k7_yy5Q/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbwaZMVAHSbtoCSpCEMZeuVspyOcuOBfbHGyr0fqdiJTpUuQ1izH5y6NRURBaUMkRjIl_Q/exec'
 const form = document.forms['submit-to-google-sheet']
 
 form.addEventListener('submit', e => {
@@ -223,7 +223,7 @@ form.addEventListener('submit', e => {
     currentPageIndex = 0;
     currentMainDiv = "Uniform";
     window.scrollTo(0, 0);
-    document.getElementById("inspection-type").value = "ABUS";
+    document.getElementById("inspection-type").value = "Blues";
     filterItemsByInspectionType();
   }, 100); // 0.1 seconds
 
@@ -240,11 +240,9 @@ form.addEventListener('submit', e => {
     });
 });
 
-// Function to filter inspection buttons based on the selected inspection type
 function filterItemsByInspectionType() {
-  const inspectionType = document.getElementById("inspection-type").value; // Get the selected value
-  const allButtons = document.querySelectorAll(".inspection-button"); // Get all inspection buttons
-  const allPassFailContainers = document.querySelectorAll(".pass-fail-container"); // Get all pass/fail containers
+  const inspectionType = document.getElementById("inspection-type").value;
+  const allPassFailContainers = document.querySelectorAll(".pass-fail-container");
 
   // Define which buttons and pass/fail boxes should be visible for each inspection type
   const visibilityMap = {
@@ -253,34 +251,27 @@ function filterItemsByInspectionType() {
     PT: ["Cover", "Hair", "Shave/Cosmetics", "Insignia", "Patches/Tapes", "Blouse", "Belt", "Gig Line", "Trousers", "Boot Blousing", "Boots", "Attention", "Pillow", "Sleeping Bag", "Mattress", "Canteen", "Footwear", "Shower Shoes", "Luggage", "Bed Frame", "Shelf", "Hangers", "PT Shirt", "PT Pants", "PT Shoes", "Locker"],
   };
 
-  // Hide all buttons and pass/fail containers initially
-  allButtons.forEach((button) => {
-    button.style.display = "none";
-  });
-  allPassFailContainers.forEach((container) => {
+
+  // Hide all pass/fail containers first
+  allPassFailContainers.forEach(container => {
     container.style.display = "none";
   });
 
-  // Show buttons and their corresponding pass/fail containers based on the selected inspection type
+  // Show only the relevant items
   const visibleItems = visibilityMap[inspectionType] || [];
-  visibleItems.forEach((item) => {
-    let button = document.querySelector(`button[onclick*="goToPassFailPage('${item}'"]`);
-    if (!button) {
-      button = document.querySelector(`button[onclick*='goToPassFailPage("${item}"']`);
-    }
+  visibleItems.forEach(item => {
     const container = document.getElementById(`pass-fail-${item}`);
-    if (button) {
-      button.style.display = "block";
-    }
     if (container) {
       container.style.display = "block";
+    } else {
+      console.warn(`No container found for item: ${item}`);
     }
   });
 }
 
 // Call filterItemsByInspectionType on page load to set ABU as the default
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("inspection-type").value = "ABUS"; // Set ABUS as the default value
+  document.getElementById("inspection-type").value = "Blues"; // Set ABUS as the default value
   filterItemsByInspectionType(); // Apply the filter immediately
 });
 
@@ -367,3 +358,8 @@ function submitAndReload(e) {
   // Manually trigger the form's submit event so the fetch handler runs
   form.dispatchEvent(new Event('submit', { cancelable: true }));
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("inspection-type").value = "Blues"; // Now it matches correctly
+  filterItemsByInspectionType();
+});
